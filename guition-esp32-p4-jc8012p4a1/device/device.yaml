@@ -1,4 +1,4 @@
-# Designed for guition-esp32-p4-jc8012p4a1
+# Designed for guition-esp32-p4-jc8012p4a1 - UPRAVENO BEZ DOTYKU
 esp32:
   variant: ESP32P4
   flash_size: 16MB
@@ -44,11 +44,6 @@ api:
 logger:
   level: DEBUG
 
-# External components
-external_components:
-  - source: github://kvj/esphome@jd9365_gsl3680
-    components: [gsl3680]
-
 # Power management
 esp_ldo:
   - channel: 3
@@ -80,25 +75,6 @@ i2c:
     frequency: 400kHz
     sda_pullup_enabled: False
     scl_pullup_enabled: False
-
-# Touchscreen
-touchscreen:
-  - platform: gsl3680
-    id: my_touchscreen
-    reset_pin: GPIO22
-    interrupt_pin: GPIO21
-    transform:
-      swap_xy: false
-      mirror_x: false
-      mirror_y: true
-    on_release:
-      then:
-        - if:
-            condition: lvgl.is_paused
-            then:
-              - light.turn_on: display_backlight
-              - lvgl.resume:
-              - lvgl.widget.redraw:
 
 # Display
 display:
